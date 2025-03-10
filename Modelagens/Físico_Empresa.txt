@@ -1,0 +1,25 @@
+/* Lógico_Empresa: */
+
+CREATE TABLE Funcionario (
+    salario decimal(4,2),
+    cargo varchar(255),
+    datanascimento date,
+    id_funcionario int PRIMARY KEY,
+    cargahoraia decimal(102),
+    nome varchar(255),
+    dataadmissao date,
+    cpf varchar(),
+    rg varchar(),
+    email varchar(),
+    fk_Departamento_id_departamento int
+);
+
+CREATE TABLE Departamento (
+    id_departamento int PRIMARY KEY,
+    nome varchar(255)
+);
+ 
+ALTER TABLE Funcionario ADD CONSTRAINT FK_Funcionario_2
+    FOREIGN KEY (fk_Departamento_id_departamento)
+    REFERENCES Departamento (id_departamento)
+    ON DELETE CASCADE;
