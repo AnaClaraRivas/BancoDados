@@ -1,0 +1,213 @@
+Microsoft Windows [versão 10.0.19045.5131]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\lab1-aluno>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 98
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| etecmcm2           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use etecmcm2
+Database changed
+MariaDB [etecmcm2]> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| etecmcm2           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]>
+MariaDB [etecmcm2]> describe;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [etecmcm2]> describe etecmcm2;
+ERROR 1146 (42S02): Table 'etecmcm2.etecmcm2' doesn't exist
+MariaDB [etecmcm2]> alter table produtos add unidade_medida date;
+Query OK, 0 rows affected (0.013 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' whre id_categoria = 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'whre id_categoria = 1' at line 1
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 1;
+Query OK, 2 rows affected, 2 warnings (0.006 sec)
+Rows matched: 2  Changed: 2  Warnings: 2
+
+MariaDB [etecmcm2]> alter table produtos add unidade_medida varchar(10);
+ERROR 1060 (42S21): Duplicate column name 'unidade_medida'
+MariaDB [etecmcm2]> alter table produtos drop column unidade_medida;
+Query OK, 0 rows affected (0.013 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> alter table produtos add unidade_medida varchar(10);
+Query OK, 0 rows affected (0.011 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 1;
+Query OK, 2 rows affected (0.008 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> alter table produtos drop column unidade_medida;
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> alter table produtos add unidade_medida varchar(10);
+Query OK, 0 rows affected (0.007 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 3 or 6 or 7;
+Query OK, 11 rows affected (0.002 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+MariaDB [etecmcm2]> alter table produtos drop column unidade_medida;
+Query OK, 0 rows affected (0.005 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> alter table produtos add unidade_medida varchar(10);
+Query OK, 0 rows affected (0.005 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '200g' where id_categoria = 2;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 6;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 3;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 8;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'ml' where id_categoria = 8;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '200g' where id_categoria = 4;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '100g' where id_categoria = 5;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = 'uni' where id_categoria = 7;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '500ml' where id_categoria = 9;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '500ml' where id_categoria = 8;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '400g' where id_categoria = 9;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '2kg' where id_categoria = 10;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = '210g' where id_categoria = 1;
+Query OK, 2 rows affected (0.003 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
