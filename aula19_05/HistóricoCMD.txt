@@ -1,0 +1,372 @@
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| etecmcm2           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use etecmcm2;
+Database changed
+MariaDB [etecmcm2]> show tables;
++--------------------+
+| Tables_in_etecmcm2 |
++--------------------+
+| categorias         |
+| produtos           |
++--------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> describe produtos;
++--------------+---------------+------+-----+---------+----------------+
+| Field        | Type          | Null | Key | Default | Extra          |
++--------------+---------------+------+-----+---------+----------------+
+| id_produto   | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nome         | varchar(255)  | YES  |     | NULL    |                |
+| preco        | decimal(10,2) | YES  |     | NULL    |                |
+| quant        | int(11)       | YES  |     | NULL    |                |
+| marca        | varchar(255)  | YES  |     | NULL    |                |
+| id_categoria | int(11)       | YES  | MUL | NULL    |                |
++--------------+---------------+------+-----+---------+----------------+
+6 rows in set (0.009 sec)
+
+MariaDB [etecmcm2]> alter table produtos add unidade_medida varchar(10);
+Query OK, 0 rows affected (0.011 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> describe produtos;
++----------------+---------------+------+-----+---------+----------------+
+| Field          | Type          | Null | Key | Default | Extra          |
++----------------+---------------+------+-----+---------+----------------+
+| id_produto     | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(255)  | YES  |     | NULL    |                |
+| preco          | decimal(10,2) | YES  |     | NULL    |                |
+| quant          | int(11)       | YES  |     | NULL    |                |
+| marca          | varchar(255)  | YES  |     | NULL    |                |
+| id_categoria   | int(11)       | YES  | MUL | NULL    |                |
+| unidade_medida | varchar(10)   | YES  |     | NULL    |                |
++----------------+---------------+------+-----+---------+----------------+
+7 rows in set (0.009 sec)
+
+MariaDB [etecmcm2]> select * from produtos;
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+| id_produto | nome            | preco  | quant | marca          | id_categoria | unidade_medida |
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+|          1 | Sabão em pó     |  25.00 |     4 | OMO            |            1 | NULL           |
+|          2 | Detergente      |   3.00 |    25 | Ypê            |            1 | NULL           |
+|          3 | Mussarela       |  10.00 |    80 | Sadia          |            2 | NULL           |
+|          4 | Panela          | 200.00 |     1 | Clock          |            3 | NULL           |
+|          5 | Carne de panela |  25.00 |     7 | Perdigão       |            4 | NULL           |
+|          6 | Milho           |   4.00 |    55 | Qualitá        |            5 | NULL           |
+|          7 | Celular         | 900.00 |    67 | Samsung        |            6 | NULL           |
+|          8 | Creme Bubbaloo  |  90.00 |    59 | O boticario    |            7 | NULL           |
+|          9 | Refrigerante    |   3.00 |   478 | Schweppes      |            8 | NULL           |
+|         10 | Banana          |  10.00 |    92 | Polosul Frutas |            9 | NULL           |
+|         11 | Nuggets         |  30.00 |    58 | Aurora         |           10 | NULL           |
+|         12 | Presunto        |  12.00 |    47 | Perdigão       |            2 | NULL           |
+|         13 | Pote            |  36.00 |    67 | Tupperware     |            3 | NULL           |
+|         14 | Frango          |  34.00 |    35 | Aurora         |            4 | NULL           |
+|         15 | Ervilha         |   7.00 |    57 | Quero          |            5 | NULL           |
+|         16 | Fone Bluetooth  |  40.00 |    89 | Jbl            |            6 | NULL           |
+|         17 | Creme Vaquinha  |  56.00 |    79 | O boticario    |            7 | NULL           |
+|         18 | Suco de Uva     |   5.00 |    67 | Valle          |            8 | NULL           |
+|         19 | Maçã            |   8.00 |   123 | Polosul Frutas |            9 | NULL           |
+|         20 | Batata Frita    |  24.00 |    60 | Aurora         |           10 | NULL           |
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+20 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "kg" where id_categoria = 1;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "uni" where id_produto = 2;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "kg" where id_categoria = 2;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "uni" where id_categoria = 3;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "uni" where id_categoria = 6;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "kg" where id_categoria = 4;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "kg" where id_categoria = 9;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "ml" where id_categoria = 8;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "g" where id_categoria = 7;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "g" where id_categoria = 5;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "g" where id_produto = 10;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "kg" where id_categoria = 9;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 2  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produtos set unidade_medida = "g" where id_categoria = 10;
+Query OK, 2 rows affected (0.002 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+MariaDB [etecmcm2]> select * from produtos;
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+| id_produto | nome            | preco  | quant | marca          | id_categoria | unidade_medida |
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+|          1 | Sabão em pó     |  25.00 |     4 | OMO            |            1 | kg             |
+|          2 | Detergente      |   3.00 |    25 | Ypê            |            1 | uni            |
+|          3 | Mussarela       |  10.00 |    80 | Sadia          |            2 | kg             |
+|          4 | Panela          | 200.00 |     1 | Clock          |            3 | uni            |
+|          5 | Carne de panela |  25.00 |     7 | Perdigão       |            4 | kg             |
+|          6 | Milho           |   4.00 |    55 | Qualitá        |            5 | g              |
+|          7 | Celular         | 900.00 |    67 | Samsung        |            6 | uni            |
+|          8 | Creme Bubbaloo  |  90.00 |    59 | O boticario    |            7 | g              |
+|          9 | Refrigerante    |   3.00 |   478 | Schweppes      |            8 | ml             |
+|         10 | Banana          |  10.00 |    92 | Polosul Frutas |            9 | kg             |
+|         11 | Nuggets         |  30.00 |    58 | Aurora         |           10 | g              |
+|         12 | Presunto        |  12.00 |    47 | Perdigão       |            2 | kg             |
+|         13 | Pote            |  36.00 |    67 | Tupperware     |            3 | uni            |
+|         14 | Frango          |  34.00 |    35 | Aurora         |            4 | kg             |
+|         15 | Ervilha         |   7.00 |    57 | Quero          |            5 | g              |
+|         16 | Fone Bluetooth  |  40.00 |    89 | Jbl            |            6 | uni            |
+|         17 | Creme Vaquinha  |  56.00 |    79 | O boticario    |            7 | g              |
+|         18 | Suco de Uva     |   5.00 |    67 | Valle          |            8 | ml             |
+|         19 | Maçã            |   8.00 |   123 | Polosul Frutas |            9 | kg             |
+|         20 | Batata Frita    |  24.00 |    60 | Aurora         |           10 | g              |
++------------+-----------------+--------+-------+----------------+--------------+----------------+
+20 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos;
++-----------------+--------+
+| nome            | preco  |
++-----------------+--------+
+| Sabão em pó     |  25.00 |
+| Detergente      |   3.00 |
+| Mussarela       |  10.00 |
+| Panela          | 200.00 |
+| Carne de panela |  25.00 |
+| Milho           |   4.00 |
+| Celular         | 900.00 |
+| Creme Bubbaloo  |  90.00 |
+| Refrigerante    |   3.00 |
+| Banana          |  10.00 |
+| Nuggets         |  30.00 |
+| Presunto        |  12.00 |
+| Pote            |  36.00 |
+| Frango          |  34.00 |
+| Ervilha         |   7.00 |
+| Fone Bluetooth  |  40.00 |
+| Creme Vaquinha  |  56.00 |
+| Suco de Uva     |   5.00 |
+| Maçã            |   8.00 |
+| Batata Frita    |  24.00 |
++-----------------+--------+
+20 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where marca = 'Aurora';
++------------+--------------+-------+-------+--------+--------------+----------------+
+| id_produto | nome         | preco | quant | marca  | id_categoria | unidade_medida |
++------------+--------------+-------+-------+--------+--------------+----------------+
+|         11 | Nuggets      | 30.00 |    58 | Aurora |           10 | g              |
+|         14 | Frango       | 34.00 |    35 | Aurora |            4 | kg             |
+|         20 | Batata Frita | 24.00 |    60 | Aurora |           10 | g              |
++------------+--------------+-------+-------+--------+--------------+----------------+
+3 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where preco > 20;
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+| id_produto | nome            | preco  | quant | marca       | id_categoria | unidade_medida |
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+|          1 | Sabão em pó     |  25.00 |     4 | OMO         |            1 | kg             |
+|          4 | Panela          | 200.00 |     1 | Clock       |            3 | uni            |
+|          5 | Carne de panela |  25.00 |     7 | Perdigão    |            4 | kg             |
+|          7 | Celular         | 900.00 |    67 | Samsung     |            6 | uni            |
+|          8 | Creme Bubbaloo  |  90.00 |    59 | O boticario |            7 | g              |
+|         11 | Nuggets         |  30.00 |    58 | Aurora      |           10 | g              |
+|         13 | Pote            |  36.00 |    67 | Tupperware  |            3 | uni            |
+|         14 | Frango          |  34.00 |    35 | Aurora      |            4 | kg             |
+|         16 | Fone Bluetooth  |  40.00 |    89 | Jbl         |            6 | uni            |
+|         17 | Creme Vaquinha  |  56.00 |    79 | O boticario |            7 | g              |
+|         20 | Batata Frita    |  24.00 |    60 | Aurora      |           10 | g              |
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+11 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where quant <= 40;
++------------+-----------------+--------+-------+----------+--------------+----------------+
+| id_produto | nome            | preco  | quant | marca    | id_categoria | unidade_medida |
++------------+-----------------+--------+-------+----------+--------------+----------------+
+|          1 | Sabão em pó     |  25.00 |     4 | OMO      |            1 | kg             |
+|          2 | Detergente      |   3.00 |    25 | Ypê      |            1 | uni            |
+|          4 | Panela          | 200.00 |     1 | Clock    |            3 | uni            |
+|          5 | Carne de panela |  25.00 |     7 | Perdigão |            4 | kg             |
+|         14 | Frango          |  34.00 |    35 | Aurora   |            4 | kg             |
++------------+-----------------+--------+-------+----------+--------------+----------------+
+5 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco asc limit 5;
++--------------+-------+
+| nome         | preco |
++--------------+-------+
+| Detergente   |  3.00 |
+| Refrigerante |  3.00 |
+| Milho        |  4.00 |
+| Suco de Uva  |  5.00 |
+| Ervilha      |  7.00 |
++--------------+-------+
+5 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome, preco from produtos order by preco desc limit 5;
++----------------+--------+
+| nome           | preco  |
++----------------+--------+
+| Celular        | 900.00 |
+| Panela         | 200.00 |
+| Creme Bubbaloo |  90.00 |
+| Creme Vaquinha |  56.00 |
+| Fone Bluetooth |  40.00 |
++----------------+--------+
+5 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select count(*) as total_produtos from produtos;
++----------------+
+| total_produtos |
++----------------+
+|             20 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select avg(preco) as preco_medio from produtos;
++-------------+
+| preco_medio |
++-------------+
+|   76.100000 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome, quant from produtos order by preco desc limit 1;
++---------+-------+
+| nome    | quant |
++---------+-------+
+| Celular |    67 |
++---------+-------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select p.nome, c.nome_cat from produtos p join categorias c on p.id_categoria = c.id_categoria;
++-----------------+-------------+
+| nome            | nome_cat    |
++-----------------+-------------+
+| Sabão em pó     | limpeza     |
+| Detergente      | limpeza     |
+| Mussarela       | frios       |
+| Presunto        | frios       |
+| Panela          | utensílios  |
+| Pote            | utensílios  |
+| Carne de panela | carnes      |
+| Frango          | carnes      |
+| Milho           | enlatados   |
+| Ervilha         | enlatados   |
+| Celular         | eletronicos |
+| Fone Bluetooth  | eletronicos |
+| Creme Bubbaloo  | perfumaria  |
+| Creme Vaquinha  | perfumaria  |
+| Refrigerante    | bebidas     |
+| Suco de Uva     | bebidas     |
+| Banana          | hortifrut   |
+| Maçã            | hortifrut   |
+| Nuggets         | congelados  |
+| Batata Frita    | congelados  |
++-----------------+-------------+
+20 rows in set (0.002 sec)
+
+MariaDB [etecmcm2]> select p.nome,p.marca,p.preco from produtos p join categorias c on p.id_categoria = c.id_categoria where c.nome_cat = 'carnes';
++-----------------+----------+-------+
+| nome            | marca    | preco |
++-----------------+----------+-------+
+| Carne de panela | Perdigão | 25.00 |
+| Frango          | Aurora   | 34.00 |
++-----------------+----------+-------+
+2 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select c.nome_cat, count(*) as total_produtos from produtos p join categorias c on p.id_categoria = c.id_categoria group by c.nome_cat;
++-------------+----------------+
+| nome_cat    | total_produtos |
++-------------+----------------+
+| bebidas     |              2 |
+| carnes      |              2 |
+| congelados  |              2 |
+| eletronicos |              2 |
+| enlatados   |              2 |
+| frios       |              2 |
+| hortifrut   |              2 |
+| limpeza     |              2 |
+| perfumaria  |              2 |
+| utensílios  |              2 |
++-------------+----------------+
+10 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> SELECT * FROM produtos
+    -> WHERE preco BETWEEN 10 AND 20;
++------------+-----------+-------+-------+----------------+--------------+----------------+
+| id_produto | nome      | preco | quant | marca          | id_categoria | unidade_medida |
++------------+-----------+-------+-------+----------------+--------------+----------------+
+|          3 | Mussarela | 10.00 |    80 | Sadia          |            2 | kg             |
+|         10 | Banana    | 10.00 |    92 | Polosul Frutas |            9 | kg             |
+|         12 | Presunto  | 12.00 |    47 | Perdigão       |            2 | kg             |
++------------+-----------+-------+-------+----------------+--------------+----------------+
+3 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produtos where nome like 'C%';
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+| id_produto | nome            | preco  | quant | marca       | id_categoria | unidade_medida |
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+|          5 | Carne de panela |  25.00 |     7 | Perdigão    |            4 | kg             |
+|          7 | Celular         | 900.00 |    67 | Samsung     |            6 | uni            |
+|          8 | Creme Bubbaloo  |  90.00 |    59 | O boticario |            7 | g              |
+|         17 | Creme Vaquinha  |  56.00 |    79 | O boticario |            7 | g              |
++------------+-----------------+--------+-------+-------------+--------------+----------------+
+4 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select distinct marca from produtos;
++----------------+
+| marca          |
++----------------+
+| OMO            |
+| Ypê            |
+| Sadia          |
+| Clock          |
+| Perdigão       |
+| Qualitá        |
+| Samsung        |
+| O boticario    |
+| Schweppes      |
+| Polosul Frutas |
+| Aurora         |
+| Tupperware     |
+| Quero          |
+| Jbl            |
+| Valle          |
++----------------+
+15 rows in set (0.001 sec)
